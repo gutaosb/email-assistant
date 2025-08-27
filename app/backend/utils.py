@@ -8,7 +8,7 @@ async def read_file(file: UploadFile):
 
     if file.filename.endswith(".txt"):
         content = (await file.read()).decode("utf-8")
-    elif file.filname.endswith(".pdf"):
+    elif file.filename.endswith(".pdf"):
         pdf_reader = PyPDF2.PdfReader(file.file)
         for page in pdf_reader.pages:
             page_text = page.extract_text()
