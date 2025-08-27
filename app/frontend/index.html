@@ -3,33 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Email assistant</title>
+    <link rel="stylesheet" href="src/index.css" />
+    <title>Email Assistant</title>
   </head>
   <body>
-    <h1>Classificador de emails</h1>
-
-    <h2>Classificar texto</h2>
-
-    <textarea
-      name=""
-      id="emailText"
-      rows="5"
-      cols="50"
-      placeholder="Digite o texto do email"
-    ></textarea
-    ><br />
-
-    <button onclick="analyzeText()">Enviar texto</button>
-
-    <h2>Ou enviar arquivo</h2>
-
-    <input type="file" id="emailFile" accept=".txt,.pdf" /><br />
-    <button onclick="uploadFile()">Enviar arquivo</button>
-
-    <h2>Resultado</h2>
-    <div id="result"></div>
-
-    <script src="script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
