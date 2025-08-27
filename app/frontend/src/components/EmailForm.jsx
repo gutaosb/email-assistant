@@ -1,16 +1,18 @@
 import { useState } from "react";
+const api_url = import.meta.env.VITE_API_URL;
 
 const EmailForm = ({ setLoading, setResult }) => {
   const [text, setText] = useState("");
 
   const handleAnalyze = async () => {
+    console.log(api_url);
     if (!text.trim()) return alert("Digite um texto primeiro");
 
     setLoading(true);
     setResult(null);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/analyze", {
+      const response = await fetch(`${api_url}/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
