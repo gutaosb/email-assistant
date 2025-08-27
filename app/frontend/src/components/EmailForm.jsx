@@ -5,7 +5,6 @@ const EmailForm = ({ setLoading, setResult }) => {
   const [text, setText] = useState("");
 
   const handleAnalyze = async () => {
-    console.log(api_url);
     if (!text.trim()) return alert("Digite um texto primeiro");
 
     setLoading(true);

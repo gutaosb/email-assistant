@@ -1,17 +1,20 @@
 #criacao API
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from services import classify_email, generate_response
 from utils import read_file
 import logging
+import os
 
 # configuracao de logs
 logging.basicConfig(level=logging.INFO)
 
 
 app = FastAPI()
+
 
 # Habilita CORS
 app.add_middleware(
@@ -27,11 +30,13 @@ class EmailInput(BaseModel):
     text:str
 
 
-@app.get('/')
+#Rotas da API -------------------------------
+
+@app.get('/api')
 def read_root():
     return({"message":"server rodando"})
 
-@app.post('/analyze')
+@app.post('/api/analyze')
 def analyze_email(email: EmailInput):
 
     try:
@@ -64,7 +69,7 @@ def analyze_email(email: EmailInput):
 
 
 
-@app.post('/upload')
+@app.post('/api/upload')
 async def upload_file(file: UploadFile = File(...)):
     try:
         #validar extensao do arquivo
@@ -97,4 +102,16 @@ async def upload_file(file: UploadFile = File(...)):
             content={"erro": f"Ocorreu um erro interno: {str(e)}"}
         )
 
-    
+
+
+#Servir frontend -----------------------------
+
+# Configura frontend React (build)
+app.mount("/assets", StaticFiles(directory="dist/assets"), name="assets")
+
+@app.get("/{full_path:path}")
+async def serve_frontend(full_path: str):
+    file_path = os.path.join("dist", full_path)
+    if os.path.exists(file_path) and os.path.isfile(file_path):
+        return FileResponse(file_path)
+    return FileResponse("dist/index.html")
