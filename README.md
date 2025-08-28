@@ -7,9 +7,11 @@ O objetivo é reduzir o trabalho manual de triagem de mensagens em empresas com 
 🚀 Demonstração Online
 
 Frontend (React + Vite + Tailwind, hospedado no Vercel):
+
 👉 https://email-assistant-nine.vercel.app
 
 Backend (FastAPI, hospedado no Render):
+
 👉 https://email-assistant-gsqb.onrender.com
 
 ⚠️ Observação: O backend no Render (plano gratuito) pode levar alguns segundos para “acordar” no primeiro acesso.
@@ -32,24 +34,35 @@ Interface moderna, rápida e responsiva
 
 🛠️ Tecnologias Utilizadas
 Frontend:
+
 React + Vite
+
 TailwindCSS
+
 Deploy: Vercel
 
 Backend:
+
 FastAPI
+
 Hugging Face Inference API (modelo facebook/bart-large-mnli)
+
 PyPDF2 (leitura de PDF)
+
 Deploy: Render
 
 ⚙️ Como Rodar Localmente
+
 🔹 Pré-requisitos
 
 Python 3.10+
+
 Node.js + npm
 
 🔹 Clonar o repositório
+
 git clone https://github.com/gutaosb/email-assistant.git
+
 cd email-assistant
 
 🔹 Backend
@@ -61,12 +74,15 @@ cd app/backend
 Crie um ambiente virtual e instale dependências:
 
 python -m venv venv
+
 source venv/bin/activate # Linux/Mac
+
 venv\Scripts\activate # Windows
 
 pip install -r requirements.txt
 
 Configure variáveis de ambiente:
+
 Crie o arquivo .env na pasta backend:
 
 HF_API_TOKEN=seu_token_da_huggingface
@@ -98,6 +114,7 @@ npm run dev
 👉 disponível em http://localhost:5173
 
 🧪 Exemplos de Emails para Teste
+
 ✅ Produtivo
 Olá equipe, gostaria de saber qual é o status da minha solicitação de acesso ao sistema financeiro. Preciso dessa liberação até sexta-feira.
 
@@ -127,4 +144,5 @@ app/
 Feito por Augusto Semensato Bortoloti
 
 LinkedIn: linkedin.com/in/augustosb
+
 GitHub: github.com/gutaosb
