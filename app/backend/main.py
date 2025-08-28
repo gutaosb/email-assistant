@@ -4,10 +4,11 @@ from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from app.backend.services import classify_email, generate_response
-from app.backend.utils import read_file
+from services import classify_email, generate_response
+from utils import read_file
 import logging
 import os
+import uvicorn
 
 # configuracao de logs
 logging.basicConfig(level=logging.INFO)
@@ -115,3 +116,9 @@ async def serve_frontend(full_path: str):
     if os.path.exists(file_path) and os.path.isfile(file_path):
         return FileResponse(file_path)
     return FileResponse("dist/index.html")
+
+
+# # Ponto de entrada
+# if __name__ == "__main__":
+#     port = int(os.environ.get("PORT", 8000))  # Render fornece a porta via env
+#     uvicorn.run("app.backend.main:app", host="0.0.0.0", port=port, reload=False)
