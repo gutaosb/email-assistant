@@ -123,20 +123,35 @@ Olá, tudo bem? Quero desejar um ótimo final de semana a toda a equipe!
 
 📂 Estrutura do Projeto
 app/
+
 | backend/
+
 | ├── main.py # API FastAPI
+
 | ├── services.py # Classificação e resposta automática
+
 | ├── utils.py # Funções auxiliares (leitura PDF, normalização texto)
+
 | ├── requirements.txt
+
 | ├── .env
+
 |
+
 | frontend/
+
 | ├── src/
+
 | │ ├── App.jsx
+
 | │ ├── main.jsx
+
 | │ ├── components/
+
 | ├── package.json
+
 | ├── vite.config.js
+
 | ├── .env
 
 👨‍💻 Autor
