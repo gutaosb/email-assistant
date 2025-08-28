@@ -1,5 +1,5 @@
 import { useState } from "react";
-const api_url = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 const EmailForm = ({ setLoading, setResult }) => {
   const [text, setText] = useState("");
@@ -11,7 +11,7 @@ const EmailForm = ({ setLoading, setResult }) => {
     setResult(null);
 
     try {
-      const response = await fetch(`${api_url}/analyze`, {
+      const response = await fetch(`${API_URL}/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
