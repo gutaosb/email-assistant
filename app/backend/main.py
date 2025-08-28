@@ -4,8 +4,8 @@ from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from services import classify_email, generate_response
-from utils import read_file
+from app.backend.services import classify_email, generate_response
+from app.backend.utils import read_file
 import logging
 import os
 
