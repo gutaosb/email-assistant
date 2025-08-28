@@ -1,14 +1,14 @@
 #criacao API
-from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from dotenv import load_dotenv
 from services import classify_email, generate_response
 from utils import read_file
 import logging
-import os
-import uvicorn
+
+load_dotenv()
 
 # configuracao de logs
 logging.basicConfig(level=logging.INFO)
@@ -33,11 +33,11 @@ class EmailInput(BaseModel):
 
 #Rotas da API -------------------------------
 
-@app.get('/api')
+@app.get('/')
 def read_root():
     return({"message":"server rodando"})
 
-@app.post('/api/analyze')
+@app.post('/analyze')
 def analyze_email(email: EmailInput):
 
     try:
@@ -50,7 +50,7 @@ def analyze_email(email: EmailInput):
         
         #classificacao
         category = classify_email(email.text)    
-        response_text = generate_response(email.text, category)
+        response_text = generate_response(category)
 
         return JSONResponse(
             status_code=200,
@@ -70,7 +70,7 @@ def analyze_email(email: EmailInput):
 
 
 
-@app.post('/api/upload')
+@app.post('/upload')
 async def upload_file(file: UploadFile = File(...)):
     try:
         #validar extensao do arquivo
@@ -85,7 +85,7 @@ async def upload_file(file: UploadFile = File(...)):
 
         #classificacao
         category = classify_email(content)
-        response_text = generate_response(content, category)
+        response_text = generate_response(category)
 
         return JSONResponse(
             status_code=200,
@@ -102,23 +102,3 @@ async def upload_file(file: UploadFile = File(...)):
             status_code=500,
             content={"erro": f"Ocorreu um erro interno: {str(e)}"}
         )
-
-
-
-#Servir frontend -----------------------------
-
-# Configura frontend React (build)
-app.mount("/assets", StaticFiles(directory="dist/assets"), name="assets")
-
-@app.get("/{full_path:path}")
-async def serve_frontend(full_path: str):
-    file_path = os.path.join("dist", full_path)
-    if os.path.exists(file_path) and os.path.isfile(file_path):
-        return FileResponse(file_path)
-    return FileResponse("dist/index.html")
-
-
-# # Ponto de entrada
-# if __name__ == "__main__":
-#     port = int(os.environ.get("PORT", 8000))  # Render fornece a porta via env
-#     uvicorn.run("app.backend.main:app", host="0.0.0.0", port=port, reload=False)
