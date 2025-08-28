@@ -122,6 +122,7 @@ Olá equipe, gostaria de saber qual é o status da minha solicitação de acesso
 Olá, tudo bem? Quero desejar um ótimo final de semana a toda a equipe!
 
 📂 Estrutura do Projeto
+
 app/
 
 | backend/
